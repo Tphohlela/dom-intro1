@@ -29,6 +29,7 @@ updateSettingsReference.addEventListener('click', function () {
     smsCostSettingReference = Number(smsCostSetting.value);
     warningLevelSettingReference = warningLevel.value;
     criticalLevelSettingReference = Number(criticalLevel.value);
+    addColours(total1);
 });
 
 function settingsBill() {
