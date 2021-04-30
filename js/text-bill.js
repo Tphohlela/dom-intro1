@@ -9,6 +9,8 @@ var smsTotal = 0;
 var callTotalOne = document.querySelector(".callTotalOne");
 var smsTotalOne = document.querySelector(".smsTotalOne");
 var totalOne = document.querySelector(".totalOne");
+
+var instanceTextBill = textBill();
 //add an event listener for when the add button is pressed
 
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
@@ -19,25 +21,14 @@ function textBillTotal(){
     // get the value entered in the billType textfield
     var billTypeEntered = billTypeText.value.trim();
     // update the correct total
+    instanceTextBill.textBillFunc(billTypeEntered);
 
-    if (billTypeEntered === "call"){
-        callsTotal += 2.75
-    }
-    else if (billTypeEntered === "sms"){
-        smsTotal += 0.75;
-    }
+   
     //update the totals that is displayed on the screen.
-    callTotalOne.innerHTML = callsTotal.toFixed(2);
-    smsTotalOne.innerHTML = smsTotal.toFixed(2);
-    var totalCost = callsTotal + smsTotal;
-    totalOne.innerHTML = totalCost.toFixed(2);
-
-    if ( totalCost >= 50){
-        // adding the danger class will make the text red
-        totalOne.classList.add("danger");
-    }
-    else if ( totalCost >= 30){
-        totalOne.classList.add("warning");
-    }
+    callTotalOne.innerHTML = instanceTextBill.getCallTotal1();
+    smsTotalOne.innerHTML = instanceTextBill.getSmsTotal1();
+ 
+    totalOne.innerHTML = instanceTextBill.getTotal1();
+    totalOne.classList.add(instanceTextBill.colorTextBill());
 }
 addButton.addEventListener('click', textBillTotal);

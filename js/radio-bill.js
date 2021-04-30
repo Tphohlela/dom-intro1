@@ -14,45 +14,31 @@ var callSum = 0;
 var smsSum = 0;
 //function
 
-function textBillTotal(){
+var instanceRadio = radioBill();
+
+function radioBillTotal(){
     // get the value entered in the billType textfield
     var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-    if (checkedRadioBtn){
-        var billItemType = checkedRadioBtn.value
-        // billItemType will be 'call' or 'sms'
-    
-    // update the correct total
-    if (billItemType === "call"){
-        callSum += 2.75
-        totalBill += 2.75
-    }
-    else if (billItemType === "sms"){
-        smsSum += 0.75;
-        totalBill += 0.75;
+  
+    instanceRadio.radioBillTotal(checkedRadioBtn.value)
 
-    }
+       //update the totals that is displayed on the screen.
+       callTotalTwo.innerHTML = instanceRadio.getRadioCallTotal();
+       smsTotalTwo.innerHTML =instanceRadio.getRadioSmsTotal();
+      
+       totalTwo.innerHTML = instanceRadio.getRadioTotal();
+    
+       totalTwo.classList.add(instanceRadio.colorRadio());
+
+    // update the correct total
+   
 }  
 
-    //update the totals that is displayed on the screen.
-    callTotalTwo.innerHTML = callSum.toFixed(2);
-    smsTotalTwo.innerHTML = smsSum.toFixed(2);
-    totalBill = callSum + smsSum;
-    totalTwo.innerHTML = totalBill.toFixed(2);
-    
-    if ( totalBill >= 50){
-        // adding the danger class will make the text red
-        totalTwo.classList.add("danger");
-    }
-    else if ( totalBill >= 30){
-        totalTwo.classList.add("warning");
-    }
-
-}
 
 
 
 //add an event listener for when the add button is pressed
-buttonForRadio.addEventListener('click', textBillTotal);
+buttonForRadio.addEventListener('click', radioBillTotal);
 //in the event listener get the value from the billItemTypeRadio radio buttons
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
